@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="form-container">
+    <div class="form-container" *ngIf="!showSignUp">
         <div class="form-blob">
             <img [src]="blobPAth" alt="Blob" class="blob-image blob-image--1">
             <img [src]="blobPAth" alt="Blob" class="blob-image blob-image--2">
@@ -15,10 +15,15 @@
                 <label for="email" class="floating-label">Email address</label>
             </div>
             <div class="input-group">
-                <input type="password" id="password" class="input-field" placeholder="" required>
+                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" placeholder="" required>
                 <label for="password" class="floating-label">Password</label>
-                <div class="eye-icon" onclick="togglePassword()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>                    
+                <div class="eye-icon" (click)="togglePassword()" role="button" aria-label="Toggle password visibility" tabindex="0">
+                    <ng-container *ngIf="!showPassword">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                    </ng-container>
+                    <ng-container *ngIf="showPassword">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+                    </ng-container>                   
                 </div>
             </div>
             <div class="input-group checkbox-group">
@@ -40,14 +45,65 @@
                 <button type="button" class="form-btn form-btn--social">
                     <img [src]="googlePath" class="btn-icon" alt="">
                 </button>
-                <!-- <button type="button" class="form-btn form-btn--social">
-                    <img [src]="googlePath" class="btn-icon" alt="">
-                </button>
+            </div>
+            <p>Don't have an account? <span  class="form-link" (click)="toggleSignup()">Sign up</span></p>
+        </div>
+    </div>
+
+    <div class="signup-container" *ngIf="showSignUp">
+        <div class="form-blob-sign">
+            <img [src]="blobPAth" alt="Blob" class="blob-image-sign blob-image--1">
+            <img [src]="blobPAth" alt="Blob" class="blob-image-sign blob-image--2">
+            <img [src]="blobPAth" alt="Blob" class="blob-image-sign blob-image--3">
+        </div>
+        <div class="form-header">
+            <p>Please enter your details</p>
+            <h1 class="welcome-text">Welcome on board</h1>
+        </div>
+        <form class="form-box-sign">
+            <div class="input-group-sign">
+                <input type="text" id="name" class="input-field" placeholder="" required>
+                <label for="name" class="floating-label">Name</label>
+            </div>
+            <div class="input-group-sign">
+                <input type="email" id="email" class="input-field" placeholder="" required>
+                <label for="email" class="floating-label">Email address</label>
+            </div>
+            <div class="input-group">
+                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" placeholder="" required>
+                <label for="password" class="floating-label">Password</label>
+                <div class="eye-icon" (click)="togglePassword()" role="button" aria-label="Toggle password visibility" tabindex="0">
+                    <ng-container *ngIf="!showPassword">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                    </ng-container>
+                    <ng-container *ngIf="showPassword">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+                    </ng-container>                   
+                </div>
+            </div>
+            <!-- <div class="input-group checkbox-group">
+                 <div class="form-col remember-me">
+                    <input type="checkbox" id="remember-me-checkbox" class="checkbox-field">
+                    <label for="remember-me-checkbox">Terms of use</label>
+                </div>
+                <div class="form-col">
+                    <input type="checkbox" id="remember-me-checkbox" class="checkbox-field">
+                    <label for="remember-me-checkbox">Privacy policy</label>
+                </div>
+            </div>  -->
+            <button type="submit" class="form-btn form-btn--submit">Sign Up</button>
+        </form>
+        <div class="form-divider">
+            <p>Or</p>
+        </div>
+        <div class="form-bottom">
+            <div class="form-socials">
                 <button type="button" class="form-btn form-btn--social">
                     <img [src]="googlePath" class="btn-icon" alt="">
-                </button> -->
+                </button>
             </div>
-            <p>Don't have an account? <a href="#" class="form-link">Sign up</a></p>
+            <p>Already have an account? <span  class="form-link" (click)="toggleSignup()">Sign in</span></p>
         </div>
     </div>
 </div>
+

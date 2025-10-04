@@ -11,11 +11,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 97vh;
+    height: 100vh;
     padding: 20px;
+    background-color: #ebeaea;
 }
 
-.form-container {
+.form-container, .signup-container {
     position: relative;
     background-color: white;
     padding: 50px 40px;
@@ -26,27 +27,27 @@
     border: 1px solid #ccc;
     overflow: hidden;
 }
-.form-header {
+.form-header, .form-header {
   position: relative;
   z-index: 1;
 }
-.form-header p {
+.form-header p, .form-header p {
   color: #777;
 }
-.form-header h1 {
-  font-size: 32px;
+.form-header h1, .form-header h1 {
+  font-size: 20px;
 }
-.form-box {
+.form-box, .form-box-sign {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-top: 50px;
 }
-.input-group {
+.input-group, .input-group-sign {
   position: relative;
   display: flex;
 }
-.input-field {
+.input-field, .input-field-sign {
   height: 48px;
   padding-inline: 14px;
   border: 1px solid #ccc;
@@ -66,7 +67,7 @@
   pointer-events: none;
 }
 .input-field:focus ~ .floating-label,
-.input-field:not(:placeholder-shown) ~ .floating-label {
+.input-field:not(:placeholder-shown) ~ .floating-label{
   top: 0;
   left: 8px;
   transform: translateY(-50%);
@@ -79,14 +80,14 @@
 .input-field:not(:focus):not(:placeholder-shown) ~ .floating-label {
   color: #5f6368;
 }
-.eye-icon {
+.eye-icon, .eye-icon-sign {
   position: absolute;
   right: 15px;
   top: 50%;
   display: flex;
   transform: translateY(-50%);
 }
-.eye-icon svg {
+.eye-icon svg, .eye-icon svg {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -98,10 +99,14 @@
   gap: 10px;
   font-size: 14px;
 }
-.remember-me {
+.remember-me, .remember-me-sign {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+.remember-me-sign{
+    display: flex;
+    flex-direction: column;
 }
 .form-btn {
   display: flex;
@@ -172,7 +177,7 @@
   height: 1px;
   background-color: #ddd;
 }
-.form-blob {
+.form-blob, .form-blob-sign {
   position: absolute;
   width: 200px;
   height: 200px;
@@ -180,7 +185,7 @@
   right: 0;
   z-index: 0;
 }
-.blob-image {
+.blob-image, .blob-image-sign {
   position: absolute;
   rotate: 205deg;
   pointer-events: none;
@@ -206,7 +211,7 @@
   --final-opacity: 0.3;
 }
 @media (max-width: 480px) {
-  .form-container {
+  .form-container, .signup-container {
     padding: 60px 30px;
   }
 }
