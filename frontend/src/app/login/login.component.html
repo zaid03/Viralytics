@@ -9,13 +9,13 @@
             <p>Please enter your details</p>
             <h1>Welcome Back</h1>
         </div>
-        <form class="form-box">
+        <form class="form-box" (ngSubmit)="submit()">
             <div class="input-group">
-                <input type="email" id="email" class="input-field" placeholder="" required>
+                <input type="email" id="email" name="email" class="input-field" placeholder=""  [(ngModel)]="email" required>
                 <label for="email" class="floating-label">Email address</label>
             </div>
             <div class="input-group">
-                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" placeholder="" required>
+                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" placeholder="" name="password" [(ngModel)]="password" required>
                 <label for="password" class="floating-label">Password</label>
                 <div class="eye-icon" (click)="togglePassword()" role="button" aria-label="Toggle password visibility" tabindex="0">
                     <ng-container *ngIf="!showPassword">
@@ -26,6 +26,9 @@
                     </ng-container>                   
                 </div>
             </div>
+            <p id="errorMessage" class="error-message" *ngIf="errorMessage" [ngClass]="{'message': !isError, 'errorMessage': isError}">
+                {{ errorMessage }}
+            </p>
             <div class="input-group checkbox-group">
                 <div class="form-col remember-me">
                     <input type="checkbox" id="remember-me-checkbox" class="checkbox-field">
@@ -81,16 +84,6 @@
                     </ng-container>                   
                 </div>
             </div>
-            <!-- <div class="input-group checkbox-group">
-                 <div class="form-col remember-me">
-                    <input type="checkbox" id="remember-me-checkbox" class="checkbox-field">
-                    <label for="remember-me-checkbox">Terms of use</label>
-                </div>
-                <div class="form-col">
-                    <input type="checkbox" id="remember-me-checkbox" class="checkbox-field">
-                    <label for="remember-me-checkbox">Privacy policy</label>
-                </div>
-            </div>  -->
             <button type="submit" class="form-btn form-btn--submit">Sign Up</button>
         </form>
         <div class="form-divider">
