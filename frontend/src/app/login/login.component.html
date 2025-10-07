@@ -11,11 +11,11 @@
         </div>
         <form class="form-box" (ngSubmit)="submit()">
             <div class="input-group">
-                <input type="email" id="email" name="email" class="input-field" placeholder=""  [(ngModel)]="email" required>
+                <input type="email" id="email" name="email" class="input-field"  [(ngModel)]="email" required>
                 <label for="email" class="floating-label">Email address</label>
             </div>
             <div class="input-group">
-                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" placeholder="" name="password" [(ngModel)]="password" required>
+                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" name="password" [(ngModel)]="password" required>
                 <label for="password" class="floating-label">Password</label>
                 <div class="eye-icon" (click)="togglePassword()" role="button" aria-label="Toggle password visibility" tabindex="0">
                     <ng-container *ngIf="!showPassword">
@@ -63,17 +63,17 @@
             <p>Please enter your details</p>
             <h1 class="welcome-text">Welcome on board</h1>
         </div>
-        <form class="form-box-sign">
+        <form class="form-box-sign" (ngSubmit)="signSubmit()">
             <div class="input-group-sign">
-                <input type="text" id="name" class="input-field" placeholder="" required>
+                <input type="text" id="signupName" class="input-field" name="signupName" [(ngModel)]="nameSign" required>
                 <label for="name" class="floating-label">Name</label>
             </div>
             <div class="input-group-sign">
-                <input type="email" id="email" class="input-field" placeholder="" required>
+                <input type="email" id="signup-email" class="input-field" name="signup-email" [(ngModel)]="emailSign" required>
                 <label for="email" class="floating-label">Email address</label>
             </div>
             <div class="input-group">
-                <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-field" placeholder="" required>
+                <input [type]="showPassword ? 'text' : 'password'" id="signup-password" name="signup-password" class="input-field" [(ngModel)]="passwordSign"  required>
                 <label for="password" class="floating-label">Password</label>
                 <div class="eye-icon" (click)="togglePassword()" role="button" aria-label="Toggle password visibility" tabindex="0">
                     <ng-container *ngIf="!showPassword">
@@ -84,6 +84,9 @@
                     </ng-container>                   
                 </div>
             </div>
+            <p id="errorMessageSign" class="error-message" *ngIf="errorMessageSign" [ngClass]="{'messageSign': !isErrorSign, 'errorMessageSign': isErrorSign}">
+                {{ errorMessageSign }}
+            </p>
             <button type="submit" class="form-btn form-btn--submit">Sign Up</button>
         </form>
         <div class="form-divider">

@@ -54,5 +54,32 @@ export class LoginComponent {
     })
   }
 
+  nameSign = '';
+  emailSign = '';
+  passwordSign = '';
+  errorMessageSign: string | null = null;
+  isErrorSign: boolean = false;
+
+  signSubmit(): void{
+    const payload = {
+      email: this.emailSign,
+      password: this.passwordSign,
+      name: this.nameSign
+    }
+
+    this.http.post<{ status?: string }>('http://localhost:8080/api/auth/register', payload
+    ).subscribe({
+      next: (res) => {
+        console.log("registration succesfull.", res);
+        this.errorMessageSign = null;
+        this.isError = false;
+      },
+      error: (err) => {
+        this.errorMessageSign = err?.error?.error || err?.MessageSign || 'sign up failed';
+        this.isError = true;
+        console.log("sign up error", err);
+      }
+    })
+  }
   
 }
