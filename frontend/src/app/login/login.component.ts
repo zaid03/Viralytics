@@ -38,12 +38,22 @@ export class LoginComponent {
       password: this.password,
     }
 
+    if(this.email.trim() === '' || this.password.trim() === '') {
+      this.errorMessage = 'All fields are required';
+      this.isError = true;
+      return
+    }
+
+    this.errorMessage = null;
+    this.isError = false;
+
     this.http.post<{ status?: string }>('http://localhost:8080/api/auth/login', payload
     ).subscribe({
       next: (res) => {
         console.log("login succesfull.", res);
         this.errorMessage = null;
         this.isError = false;
+        this.router.navigate(['/dashboard'])
       },
       error: (err) => {
         this.errorMessage = err?.error?.error || err?.message || 'login failed';
@@ -67,16 +77,26 @@ export class LoginComponent {
       name: this.nameSign
     }
 
+    if(this.nameSign.trim() === '' || this.emailSign.trim() === '' || this.passwordSign.trim() === '') {
+      this.errorMessageSign = 'All fields are required';
+      this.isErrorSign = true;
+      return;
+    }
+
+    this.errorMessageSign = null;
+    this.isErrorSign = false;
+
     this.http.post<{ status?: string }>('http://localhost:8080/api/auth/register', payload
     ).subscribe({
       next: (res) => {
         console.log("registration succesfull.", res);
-        this.errorMessageSign = null;
-        this.isError = false;
+        this.errorMessageSign = 'Account registered successfully';
+        this.isErrorSign = false;
+        this.showSignUp = false;
       },
       error: (err) => {
         this.errorMessageSign = err?.error?.error || err?.MessageSign || 'sign up failed';
-        this.isError = true;
+        this.isErrorSign = true;
         console.log("sign up error", err);
       }
     })
