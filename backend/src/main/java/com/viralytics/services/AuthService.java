@@ -48,4 +48,9 @@ public class AuthService {
             return passwordEncoder.matches(rawPassword, u.getPassword());
         }).orElse(false);
     }
+
+    public Optional<Users> findByEmail(String email) {
+        if (email == null) return Optional.empty();
+        return userRepository.findByEmail(email.trim().toLowerCase());
+    }
 }

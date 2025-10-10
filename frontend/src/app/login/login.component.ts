@@ -47,7 +47,8 @@ export class LoginComponent {
     this.errorMessage = null;
     this.isError = false;
 
-    this.http.post<{ status?: string }>('http://localhost:8080/api/auth/login', payload
+    this.http.post<{ status?: string }>('http://localhost:8080/api/auth/login', payload,
+      { withCredentials: true }
     ).subscribe({
       next: (res) => {
         console.log("login succesfull.", res);
@@ -86,7 +87,8 @@ export class LoginComponent {
     this.errorMessageSign = null;
     this.isErrorSign = false;
 
-    this.http.post<{ status?: string }>('http://localhost:8080/api/auth/register', payload
+    this.http.post<{ status?: string }>('http://localhost:8080/api/auth/register', payload,
+      { withCredentials: true }
     ).subscribe({
       next: (res) => {
         console.log("registration succesfull.", res);
@@ -95,11 +97,12 @@ export class LoginComponent {
         this.showSignUp = false;
       },
       error: (err) => {
-        this.errorMessageSign = err?.error?.error || err?.MessageSign || 'sign up failed';
+        this.errorMessageSign = err?.error?.error || err?.message || 'sign up failed';
         this.isErrorSign = true;
         console.log("sign up error", err);
       }
     })
   }
-  
+
+
 }
